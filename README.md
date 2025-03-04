@@ -3,6 +3,20 @@
 这是一个用于自动获取并发送摸鱼日报到飞书群的机器人程序。
 摸鱼日报：<https://dayu.qqsuu.cn/moyuribao/apis.php>
 
+## 流程图
+
+```mermaid
+graph TD
+    A[加载配置文件] --> B[获取tenant_access_token]
+    B --> C[抓取摸鱼图片]
+    C --> D[上传到飞书]
+    D --> E[获取image_key]
+    E --> F[发送群消息]
+    F --> G{成功?}
+    G -->|否| H[发送错误通知]
+    G -->|是| I[任务完成]
+```
+
 ## 设置步骤
 
 1. 复制示例配置文件并填入你的凭据:
