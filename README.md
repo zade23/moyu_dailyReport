@@ -51,16 +51,33 @@ graph TD
    python dailyReport.py
    ```
 
-## 安全注意事项
+### 设置定时任务
 
-- `config.json` 文件已被添加到 `.gitignore` 中，请确保不要将其提交到版本控制系统
-- 定期更新你的应用密钥和机器人Webhook URL
+1. 确保shell脚本有执行权限
 
-## 定时执行
+   ```bash
+   chmod +x run_daily_report.sh
+   ```
 
-可以使用crontab设置定时任务，每天自动发送摸鱼日报，例如:
+2. 编辑crontab
 
-```bash
-# 每天上午9:00发送
-0 9 * * * cd /path/to/moyu_dailyReport && python dailyReport.py
-```
+   ```bash
+   crontab -e
+   ```
+
+3. 添加定时任务（例如每天早上9点运行）
+
+   ```
+   0 9 * * * /bin/bash /完整路径/moyu_dailyReport/run_daily_report.sh
+   ```
+
+## 配置说明
+
+在`config.json`中需要配置以下字段:
+
+- `webhook_url`: 飞书群聊的webhook URL
+- `tenant_token_url`: 获取tenant_token的URL
+- `app_id`: 飞书应用的App ID
+- `app_secret`: 飞书应用的App Secret
+- `upload_url`: 飞书图片上传API地址
+- `api_url`: 摸鱼日报API地址
